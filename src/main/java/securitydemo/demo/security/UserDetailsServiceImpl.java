@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import securitydemo.demo.entity.SysUser;
+import securitydemo.demo.enums.ErrorMessageEnum;
 import securitydemo.demo.repository.UserRepository;
 
 import java.util.ArrayList;
@@ -25,6 +26,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (sysUser != null) {
             return new User(sysUser.getUsername(), new BCryptPasswordEncoder().encode(sysUser.getPassword()), new ArrayList<GrantedAuthority>());
         }
-        throw new InternalAuthenticationServiceException("User " + username + " not exist");
+        throw new InternalAuthenticationServiceException(String.format(ErrorMessageEnum.USER_NOT_FOUND.getMessage(),username));
     }
 }
