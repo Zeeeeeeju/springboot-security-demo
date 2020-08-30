@@ -21,6 +21,7 @@ import securitydemo.demo.filter.AuthFilter;
 import securitydemo.demo.handler.SecurityAuthenticationFailHandler;
 import securitydemo.demo.handler.SecurityAuthenticationSuccessHandler;
 import securitydemo.demo.security.SecurityAuthenticationEntryPoint;
+import securitydemo.demo.security.SecurityPasswordEncoder;
 
 import java.io.PrintWriter;
 
@@ -39,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+                .passwordEncoder(new SecurityPasswordEncoder());
     }
 
     @Override

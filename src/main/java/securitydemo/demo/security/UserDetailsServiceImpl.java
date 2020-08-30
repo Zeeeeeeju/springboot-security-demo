@@ -24,7 +24,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         SysUser sysUser = userRepository.findUserByUsername(username);
         if (sysUser != null) {
-            return new User(sysUser.getUsername(), new BCryptPasswordEncoder().encode(sysUser.getPassword()), new ArrayList<GrantedAuthority>());
+            return new User(sysUser.getUsername(), sysUser.getPassword(), new ArrayList<GrantedAuthority>());
         }
         throw new InternalAuthenticationServiceException(String.format(ErrorMessageEnum.USER_NOT_FOUND.getMessage(),username));
     }
